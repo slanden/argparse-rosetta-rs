@@ -1,0 +1,13 @@
+[package]
+name = "router-baseline-app"
+version = "0.1.0"
+authors = ["Shelby Landen"]
+edition = "2021"
+
+[[bin]]
+name = "router-baseline-app"
+path = "app.rs"
+
+[dependencies]
+router = {path = "/home/slanden/Projects/router"}
+tree-pack = {path = "/home/slanden/Projects/tree-pack"}
