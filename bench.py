@@ -4,10 +4,12 @@ import copy
 import datetime
 import json
 import multiprocessing
-import pathlib
 import platform
 import subprocess
 import tempfile
+from wcmatch import pathlib, glob
+
+PATH_PATTERN = "*-app"
 
 
 def main():
@@ -41,7 +43,7 @@ def main():
     }
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        for example_path in sorted((repo_root / "examples").glob("*-app")):
+        for example_path in sorted((repo_root / "examples").glob(PATH_PATTERN, flags=glob.BRACE)):
             manifest_path = example_path / "Cargo.toml"
             metadata = harvest_metadata(manifest_path)
 
@@ -111,6 +113,7 @@ def main():
                     "hyperfine",
                     "--warmup=1",
                     "--min-runs=5",
+                    "--shell=none",
                     f"--export-json={xargs_report_path}",
                     # Doing debug builds because that is more likely the
                     # time directly impacting people
