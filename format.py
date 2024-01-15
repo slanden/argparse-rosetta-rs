@@ -44,14 +44,14 @@ def fmt_time(case, bench):
     value = case[bench]["results"][0]["median"]
     if value < 1:
         value *= 1000
-        return "{:.0f}ms".format(value)
+        return "{:.2f}ms".format(value)
     else:
-        return "{:.0f}s".format(value)
+        return "{:.2f}s".format(value)
 
 
 def fmt_size(case, null_case):
     delta = (case["size"] - null_case["size"]) / 1024
-    return "{:,.0f} KiB".format(delta)
+    return "{:,.2f} KiB".format(delta)
 
 
 if __name__ == "__main__":
